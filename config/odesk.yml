@@ -1,0 +1,12 @@
+development:
+  api_key: 824d225a889aca186c55ac49a6b23957
+  api_secret: 984aa36db13fff5c
+
+test:
+  api_key: 824d225a889aca186c55ac49a6b23957
+  api_secret: 984aa36db13fff5c
+
+production:
+  api_key: 824d225a889aca186c55ac49a6b23957
+  api_secret: 984aa36db13fff5c
+
