@@ -1,0 +1,39 @@
+RorDesk
+=======
+
+This plugin allows you to use oDesk APIs in your rails application seamlessly,
+
+Example
+=======
+
+A sample config file (config/odesk.yml)
+    development:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+
+    test:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+
+    production:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+
+A sample controller (app/controllers/teams_controller.rb)
+    TeamsController < ApplicationController
+        before_filter :odesk_required
+
+        def index
+            @teamrooms = RubyDesk::TeamRoom.get_teamrooms(@odesk_connector)
+        end
+    end
+
+A sample view (app/views/teams/index.html.erb)
+    <h1>Teams</h1>
+    <% @teamrooms.each do |teamroom| -%>
+      <%= teamroom.company_name %><br/>
+    <% end -%>
+
+
+Copyright (c) 2010 BadrIT (Ahmed ElDawy), released under the MIT license
+
