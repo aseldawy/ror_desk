@@ -11,6 +11,9 @@ http://www.odesk.com/services/api/apply
 In the 'Callback URL' field type:
 http://<your domain>/odesk
 
+Then you need to install ror_desk plugin by typing
+script/plugin install git://github.com/aseldawy/ror_desk.git
+
 Copy and paste your 'key' and 'secret' from oDesk page to the file
     <Rails Root>/config/odesk.yml
 You may need to create it if it is not existing.
