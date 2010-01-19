@@ -1,4 +1,4 @@
-require 'ruby_desk'
+config.gem('ruby_desk')
 
 module ApplicationConfiguration
   require 'yaml'

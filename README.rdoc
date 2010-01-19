@@ -6,6 +6,15 @@ This plugin allows you to use oDesk APIs in your rails application seamlessly,
 Example
 =======
 
+First of all, you should generate API keys through oDesk web site.
+http://www.odesk.com/services/api/apply
+In the 'Callback URL' field type:
+http://<your domain>/odesk
+
+Copy and paste your 'key' and 'secret' from oDesk page to the file
+    <Rails Root>/config/odesk.yml
+You may need to create it if it is not existing.
+
 A sample config file (config/odesk.yml)
     development:
       api_key: 824d225a889aca186c55ac49a6b23957
