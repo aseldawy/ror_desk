@@ -1,4 +1,6 @@
 class OdeskController < ApplicationController
+  unloadable
+
   def index
     # Create an oDesk connector to use
     create_odesk_connector
