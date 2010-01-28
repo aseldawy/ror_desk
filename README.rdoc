@@ -1,18 +1,44 @@
-RorDesk
-=======
+=RorDesk
 
-This plugin allows you to use oDesk APIs in your rails application seamlessly,
+This plugin allows you to use oDesk APIs in your rails application seamlessly.
+It uses the gem ruby_desk (http://www.github.com/aseldawy/ruby_desk) to interact with oDesk APIs.
 
-Example
-=======
+== Overview
+RorDesk makes it very easy to use oDesk APIs from within rails applications.
+* It takes care of all the whole authentication process leaving you to call only the APIs you want.
+* It also hides most API details like forming the URL and parameters.
+* All calls are signed by default using you API key and secret to be much easier.
+* Results are automatically parsed so that your application interact with Ruby classes instead of json/xml.
+* Dates and times are automatically mapped to Ruby Date/Time objects leaving no ambiguity on time zone.
+
+== How it works
+RorDesk integrates easily with a Rails application by adding a controller and some methods in ApplicationController.
+The controller OdeskController accepts one action that is sent by oDesk after the authorization is completed.
+The path to this action is assumed to be '/odesk'.
+This action reads the 'frob' parameter and stores it into session for later use with API calls.
+
+The method 'odesk_required' is added to ApplicationController.
+This method should be used as a before_filter for actions that use oDesk APIs.
+This method either creates an @odesk_connector that will be used in the action,
+or redirects to oDesk authentication/authorization page so that the user accepts the application.
+When a redirection to oDesk Auth* page occurs, the application redirects to the original action that was called after authorization is complete.
+
+Inside your action you have an instance variable @odesk_connector that can be used with all RubyDesk methods.
+See
+    http://www.github.com/aseldawy/ruby_desk
+for more details on how to use RubyDesk.
+
+== Installation
+To install ror_desk plugin just type this at your rails application root
+    script/plugin install git://github.com/aseldawy/ror_desk.git
+
+== Example
 
 First of all, you should generate API keys through oDesk web site.
-http://www.odesk.com/services/api/apply
-In the 'Callback URL' field type:
-http://<your domain>/odesk
+    http://www.odesk.com/services/api/apply
 
-Then you need to install ror_desk plugin by typing
-script/plugin install git://github.com/aseldawy/ror_desk.git
+In the 'Callback URL' field type:
+    http://<your domain>/odesk
 
 Copy and paste your 'key' and 'secret' from oDesk page to the file
     <Rails Root>/config/odesk.yml
@@ -46,6 +72,8 @@ A sample view (app/views/teams/index.html.erb)
       <%= teamroom.company_name %><br/>
     <% end -%>
 
+(new) RorDesk is logging its messages to your log file.
+This makes life easier when a problem happens.
 
 Copyright (c) 2010 BadrIT (Ahmed ElDawy), released under the MIT license
 
