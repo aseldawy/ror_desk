@@ -5,7 +5,7 @@ It uses the gem ruby_desk (http://www.github.com/aseldawy/ruby_desk) to interact
 
 == Overview
 RorDesk makes it very easy to use oDesk APIs from within rails applications.
-* It takes care of all the whole authentication process leaving you to call only the APIs you want.
+* It takes care of the whole authentication process leaving you to call only the APIs you want.
 * It also hides most API details like forming the URL and parameters.
 * All calls are signed by default using you API key and secret to be much easier.
 * Results are automatically parsed so that your application interact with Ruby classes instead of json/xml.
