@@ -11,8 +11,9 @@ protected
   end
 
   def create_odesk_connector
-    @odesk_connector = RubyDesk::Connector.new(OdeskConfig['api_key'],
-      OdeskConfig['api_secret'], session[:odesk_api_token])
+    @odesk_connector = RubyDesk::Connector.new(
+      OdeskController.odesk_config['api_key'],
+      OdeskController.odesk_config['api_secret'], session[:odesk_api_token])
   end
 end
 
