@@ -13,6 +13,4 @@ module ApplicationConfiguration
   # Include methods required to be in ApplicationController
   ActionController::Base.send :include, RorDesk::ControllerAdditions
 end
-# Redirect log messages to Rails normal log file
-#::RubyDesk.logger = ActiveRecord::Base.logger if defined? RubyDesk
 
