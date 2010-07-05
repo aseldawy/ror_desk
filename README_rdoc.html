@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README.rdoc [RorDesk]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./RorDesk.html">RorDesk</a></li>
+				
+					<li><a href="./RorDesk/ControllerAdditions.html">RorDesk::ControllerAdditions</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1><a href="RorDesk.html">RorDesk</a></h1>
+<p>
+This plugin allows you to use oDesk APIs in your rails application
+seamlessly. It uses the gem ruby_desk (<a
+href="http://www.github.com/aseldawy/ruby_desk">www.github.com/aseldawy/ruby_desk</a>)
+to interact with oDesk APIs.
+</p>
+<h2>Overview</h2>
+<p>
+<a href="RorDesk.html">RorDesk</a> makes it very easy to use oDesk APIs
+from within rails applications.
+</p>
+<ul>
+<li><p>
+It takes care of the whole authentication process leaving you to call only
+the APIs you want.
+</p>
+</li>
+<li><p>
+It also hides most API details like forming the URL and parameters.
+</p>
+</li>
+<li><p>
+All calls are signed by default using you API key and secret to be much
+easier.
+</p>
+</li>
+<li><p>
+Results are automatically parsed so that your application interact with
+Ruby classes instead of json/xml.
+</p>
+</li>
+<li><p>
+Dates and times are automatically mapped to Ruby Date/Time objects leaving
+no ambiguity on time zone.
+</p>
+</li>
+</ul>
+<h2>How it works</h2>
+<p>
+<a href="RorDesk.html">RorDesk</a> integrates easily with a Rails
+application by adding a controller and some methods in
+ApplicationController. The controller OdeskController accepts one action
+that is sent by oDesk after the authorization is completed. The path to
+this action is assumed to be &#8217;/odesk&#8217;. This action reads the
+&#8216;frob&#8217; parameter and stores it into session for later use with
+API calls.
+</p>
+<p>
+The method &#8216;odesk_required&#8217; is added to ApplicationController.
+This method should be used as a before_filter for actions that use oDesk
+APIs. This method either creates an @odesk_connector that will be used in
+the action, or redirects to oDesk authentication/authorization page so that
+the user accepts the application. When a redirection to oDesk Auth* page
+occurs, the application redirects to the original action that was called
+after authorization is complete.
+</p>
+<p>
+Inside your action you have an instance variable @odesk_connector that can
+be used with all RubyDesk methods. See
+</p>
+<pre>
+    http://www.github.com/aseldawy/ruby_desk
+</pre>
+<p>
+for more details on how to use RubyDesk.
+</p>
+<h2>Installation</h2>
+<p>
+To install ror_desk plugin just type this at your rails application root
+</p>
+<pre>
+    script/plugin install git://github.com/aseldawy/ror_desk.git
+</pre>
+<h2>Example</h2>
+<p>
+First of all, you should generate API keys through oDesk web site.
+</p>
+<pre>
+    http://www.odesk.com/services/api/apply
+</pre>
+<p>
+In the &#8216;Callback URL&#8217; field type:
+</p>
+<pre>
+    http://&lt;your domain&gt;/odesk
+</pre>
+<p>
+Copy and paste your &#8216;key&#8217; and &#8216;secret&#8217; from oDesk
+page to the file
+</p>
+<pre>
+    &lt;Rails Root&gt;/config/odesk.yml
+</pre>
+<p>
+You may need to create it if it is not existing.
+</p>
+<p>
+A sample config file (config/odesk.yml)
+</p>
+<pre>
+    development:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+
+    test:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+
+    production:
+      api_key: 824d225a889aca186c55ac49a6b23957
+      api_secret: 984aa36db13fff5c
+</pre>
+<p>
+A sample controller (app/controllers/teams_controller.rb)
+</p>
+<pre>
+    TeamsController &lt; ApplicationController
+        before_filter :odesk_required
+
+        def index
+            @teamrooms = RubyDesk::TeamRoom.get_teamrooms(@odesk_connector)
+        end
+    end
+</pre>
+<p>
+A sample view (app/views/teams/index.html.erb)
+</p>
+<pre>
+    &lt;h1&gt;Teams&lt;/h1&gt;
+    &lt;% @teamrooms.each do |teamroom| -%&gt;
+      &lt;%= teamroom.company_name %&gt;&lt;br/&gt;
+    &lt;% end -%&gt;
+</pre>
+<p>
+(new) <a href="RorDesk.html">RorDesk</a> is logging its messages to your
+log file. This makes life easier when a problem happens.
+</p>
+<p>
+Copyright &#169; 2010 BadrIT (Ahmed ElDawy), released under the MIT license
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+
