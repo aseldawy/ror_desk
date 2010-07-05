@@ -1,4 +1,5 @@
 config.gem('ruby_desk')
+require 'ruby_desk'
 
 config.after_initialize do
   # Redirect log messages to Rails normal log file
@@ -17,5 +18,8 @@ module ApplicationConfiguration
 
   # Include methods required to be in ApplicationController
   ActionController::Base.send :include, RorDesk::ControllerAdditions
+  
+  # Rescure from RubyDesk errors with the correct callbacks
+  ActionController::Base.rescue_from ::RubyDesk::BadRequest, :with => :reaquire_token
 end
 

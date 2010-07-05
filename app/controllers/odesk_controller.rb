@@ -16,6 +16,9 @@ class OdeskController < ApplicationController
 
     # store the token to be used with future requests
     session[:odesk_api_token] = @odesk_connector.get_token
+    
+    # Store information about the user that granted this token
+    session[:odesk_auth_user] = @odesk_connector.auth_user
 
     # redirect to the original url that required oDesk
     redirect_to session[:odesk_back_url]
