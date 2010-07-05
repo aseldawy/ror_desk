@@ -1,5 +1,10 @@
 config.gem('ruby_desk')
 
+config.after_initialize do
+  # Redirect log messages to Rails normal log file
+  RubyDesk.logger = Rails.logger if defined? RubyDesk && defined? Rails
+end
+
 module ApplicationConfiguration
 
   # Check that config file exists

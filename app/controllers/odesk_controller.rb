@@ -1,8 +1,12 @@
 require 'yaml'
 
+# Receives the request that contains the frob from oDesk and stores it in the session
 class OdeskController < ApplicationController
+  # A work around for a bug in some rails versions.
+  # It sometimes causes the application to fail on the second request in development mode (cache classes = false) 
   unloadable
 
+  # The main action that is called by oDesk after a successfull log in.
   def index
     # Create an oDesk connector to use
     create_odesk_connector
